@@ -1,9 +1,9 @@
 <?php
 
-use App\Http\Controllers\StudentsController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\BlogController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -16,76 +16,24 @@ use Illuminate\Http\Request;
 |
 */
 
-// Route::get();
-// Route::post();
-// Route::put();
-// Route::patch();
-// Route::delete();
-// Route::options();
-
-//match if get or post then allow the route if true
-// Route::match(['get', 'post'], '/', function(
-//     return 'Post and Get is allowed';
-// ));
-
-//any request will be allowed
-// Route::any('/', function(
-//     return view('home');
-// ));
-
-
-// use this if will return view (if no promise or asych data to post)
-// Route::view('/', 'welcome');
-
-
-// ridirect the user when go to "/home" route to "/"
-// Route::get('/', function(){
-//     return 'redirect';
-// });
-// Route::redirect('/home', '/');
-// Route::permanentRedirect('/home', '/');
-
-// Route::get('/users', function(Request $request) {
-//     dd($request);
-//     return null;
-// });
-
-// Route::get('/get-text', function() {
-//     return response('Hello World', 200)
-//             ->header('Content-Type', 'text/plain');
-// });
-
-// Route::get('/user/{id}/{group}', function($id, $group) {
-//     return response($id.' '.$group, 200);
-// });
-
-// Route::get('/request-json', function() {
-//     return response()->json(['name' => 'Venn Edward Nicolas', 'bio' => 'Hello World!']);
-// });
-
-// Route::get('/request-download', function() {
-//     $path = public_path().'/sample.txt';
-//     $name = 'sample.txt';
-//     $headers = array(
-//         'Content-type : application/text-plain',
-//     );
-//     return response()->download($path, $name, $headers);
-// });
-
-// default route
 Route::get('/', function () {
-    return view('home');
+    return view('welcome');
 });
 
-//default controller to route class connection
-Route::get('/user', [UserController::class, 'index']);
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-// alias add name() method
-// Route::get('/user', [UserController::class, 'index'])->name('<alias>');
-// Route::get('/user/{id}', [UserController::class, 'show'])->middleware('auth');
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 
-Route::get('/user/{id}', [UserController::class, 'show']);
+Route::get('/blogs', [BlogController::class, 'index'])->name('blogs.index');
 
 
-
-Route::get('/students', [StudentsController::class, 'index']);
+Route::middleware(['auth'])->group(function () {
+    Route::resource('blogs', BlogController::class);
+});
+require __DIR__.'/auth.php';
