@@ -24,7 +24,7 @@
                                         <form action="{{ route('blogs.destroy', $blog->id) }}" method="POST" class="inline">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="text-red-400 hover:text-red-600 dark:text-red-300 dark:hover:text-red-400">Delete</button>
+                                            <button type="submit" onclick="return confirm('Are you sure you want to delete this blog?')" class="text-red-400 hover:text-red-600 dark:text-red-300 dark:hover:text-red-400">Delete</button>
                                         </form>
                                     </div>
                                 </li>

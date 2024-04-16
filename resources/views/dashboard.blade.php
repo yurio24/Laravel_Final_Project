@@ -27,13 +27,19 @@
         </div>
     </div>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    {{ __("You're logged in!") }}
-                </div>
-            </div>
-        </div>
-    </div>
+    @if(Auth::check())
+        <div class="fixed bottom-0 left-0 right-0 bg-green-500 text-white px-4 py-2 rounded-md text-center" id="loggedInMessage">You're logged in!</div>
+        <script>
+            // Wait for the document to load
+            document.addEventListener('DOMContentLoaded', function() {
+                // Delay for 3 seconds and then fade out the message
+                setTimeout(function() {
+                    document.getElementById('loggedInMessage').style.opacity = '0';
+                    setTimeout(function() {
+                        document.getElementById('loggedInMessage').style.display = 'none';
+                    }, 1000); // Fade out duration
+                }, 3000); // Display duration
+            });
+        </script>
+    @endif
 </x-app-layout>

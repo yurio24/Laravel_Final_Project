@@ -5,11 +5,6 @@ use App\Http\Controllers\BlogController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
 
-
-
-
-
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,17 +30,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/blogs', [BlogController::class, 'index'])->name('blogs.index');
-
-
-Route::middleware(['auth'])->group(function () {
-    Route::resource('blogs', BlogController::class);
-});
-
-Route::get('/blogs/{id}', [BlogController::class, 'show'])->name('blogs.show');
-Route::get('/blogs/{id}', [BlogController::class, 'show'])->name('blogs.show');
-Route::put('/blogs/{id}', 'App\Http\Controllers\BlogController@update')->name('blogs.update');
-
-Route::resource("/student" , StudentController::class);
+Route::resource('blogs', BlogController::class)->middleware('auth');
 
 require __DIR__.'/auth.php';
