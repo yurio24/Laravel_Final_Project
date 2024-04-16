@@ -28,12 +28,16 @@
                 transform: translateY(0);
             }
         }
+
+        .text-crimson {
+            color: #dc143c; 
+        }
     </style>
 </head>
 <body class="font-sans antialiased">
     <div class="min-h-screen flex items-center justify-center animate-blog">
         <div class="bg-gray-800 p-8 rounded shadow-lg w-full max-w-sm">
-            <h1 class="text-3xl font-bold mb-4">Welcome to My Blog</h1>
+            <h1 class="text-3xl font-bold mb-4">Welcome Pro<span class="text-crimson">Crimson</span></h1>
             <p class="text-gray-300 mb-4">This is a simple blog created with Laravel.</p>
             <p>
                 <a href="{{ route('login') }}" class="text-blue-300 hover:text-blue-500">Login</a> or 

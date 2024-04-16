@@ -13,16 +13,8 @@
                         <h3 class="text-lg font-semibold text-white dark:text-gray-200">Blog Management</h3>
                         <p class="mt-2"><a href="{{ route('blogs.create') }}" class="text-blue-400 hover:text-blue-600 dark:text-blue-300 dark:hover:text-blue-400">Create New Blog</a></p>
                     </div>
-                @endif
 
-                <div class="bg-gray-800 dark:bg-gray-700 overflow-hidden shadow-xl sm:rounded-lg p-6">
-                    @if ($blogs->isEmpty())
-                        <div class="flex justify-center items-center h-full">
-                            <div class="text-center">
-                                <p class="text-gray-400 dark:text-gray-500">No blogs found. <a href="{{ route('blogs.create') }}" class="text-blue-400 hover:text-blue-600 dark:text-blue-300 dark:hover:text-blue-400">Create a new blog</a>.</p>
-                            </div>
-                        </div>
-                    @else
+                    <div class="bg-gray-800 dark:bg-gray-700 overflow-hidden shadow-xl sm:rounded-lg p-6">
                         <ul class="divide-y divide-gray-200 dark:divide-gray-600">
                             @foreach ($blogs as $blog)
                                 <li class="flex items-center justify-between py-2">
@@ -38,9 +30,19 @@
                                 </li>
                             @endforeach
                         </ul>
-                    @endif
-                </div>
+                    </div>
+                @endif
             </div>
         </div>
     </div>
+
+    @if ($blogs->isEmpty())
+        <div class="bg-gray-800 dark:bg-gray-700 overflow-hidden shadow-xl sm:rounded-lg p-6 mt-8">
+            <div class="flex justify-center items-center h-full">
+                <div class="text-center">
+                    <p class="text-gray-400 dark:text-gray-500">No blogs found. <a href="{{ route('blogs.create') }}" class="text-blue-400 hover:text-blue-600 dark:text-blue-300 dark:hover:text-blue-400">Create a new blog</a>.</p>
+                </div>
+            </div>
+        </div>
+    @endif
 </x-app-layout>
