@@ -3,6 +3,11 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BlogController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\StudentController;
+
+
+
+
 
 
 /*
@@ -36,4 +41,11 @@ Route::get('/blogs', [BlogController::class, 'index'])->name('blogs.index');
 Route::middleware(['auth'])->group(function () {
     Route::resource('blogs', BlogController::class);
 });
+
+Route::get('/blogs/{id}', [BlogController::class, 'show'])->name('blogs.show');
+Route::get('/blogs/{id}', [BlogController::class, 'show'])->name('blogs.show');
+Route::put('/blogs/{id}', 'App\Http\Controllers\BlogController@update')->name('blogs.update');
+
+Route::resource("/student" , StudentController::class);
+
 require __DIR__.'/auth.php';
